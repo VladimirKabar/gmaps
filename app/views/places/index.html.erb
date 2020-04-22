@@ -1,0 +1,69 @@
+<% provide :head_tags do %>
+    <script>
+    //initMap2(<%=Place.find(1).latitude%>, <%=Place.find(1).longitude%>,<%=Place.find(2).latitude%>, <%=Place.find(2).longitude%>);
+        //initMap(<%=Place.find(1).latitude%>, <%=Place.find(1).longitude%>)
+    </script>
+<% end %>
+<p id="notice"><%= notice %></p>
+
+<h1>Places</h1>
+
+
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @places.each do |place| %>
+      <tr>
+        <td><%= place.name %></td>
+        <td id="lat<%=place.id%>"><%= place.latitude %></td>
+        <td id="lng<%=place.id%>"><%= place.longitude %></td>
+        <td><%= link_to 'Show', place %></td>
+        <td><%= link_to 'Edit', edit_place_path(place) %></td>
+        <td><%= link_to 'Destroy', place, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Place', new_place_path %>
+
+<div id="floating-panel">
+    <b>Mode of Travel: </b>
+    <select id="mode">
+      <option value="DRIVING">Driving</option>
+      <option value="WALKING">Walking</option>
+      <option value="BICYCLING">Bicycling</option>
+      <option value="TRANSIT">Transit</option>
+    </select>
+    </div>
+
+<button id="myBtn">Lets go!</button>
+<p>
+<p>Total Distance: <span id="totalKM"></span></p>
+<p>Total Time: <span id="totalH"></span></p>
+    <div id="map"></div>
+</p>
+
+<script>
+    lat1 = document.getElementById('lat1').textContent;
+    lng1 = document.getElementById('lng1').textContent;
+    lat2 = document.getElementById('lat2').textContent;
+    lng2 = document.getElementById('lng2').textContent;
+    document.getElementById("myBtn").addEventListener('click', function () {
+    initMap2(<%=Place.find(1).latitude%>, <%=Place.find(1).longitude%>,<%=Place.find(2).latitude%>, <%=Place.find(2).longitude%>);
+    });
+    document.getElementById('mode').addEventListener('change', function () {
+      initMap2(<%=Place.find(1).latitude%>, <%=Place.find(1).longitude%>,<%=Place.find(2).latitude%>, <%=Place.find(2).longitude%>);
+    });
+</script>

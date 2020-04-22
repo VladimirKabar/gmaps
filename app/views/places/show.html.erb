@@ -1,0 +1,33 @@
+<% provide :head_tags do %>
+    <script>
+    document.addEventListener("DOMContentLoaded", function(){
+        initMap(<%=@place.latitude%>, <%=@place.longitude%>)
+    });
+    </script>
+<% end %>
+
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @place.name %>
+</p>
+
+<p>
+  <strong>Latitude:</strong>
+  <%= @place.latitude %>
+</p>
+
+<p>
+  <strong>Longitude:</strong>
+  <%= @place.longitude %>
+</p>
+
+<%= link_to 'Edit', edit_place_path(@place) %>
+<%= link_to 'Back', places_path %>
+<%= link_to 'Home', root_path %>
+
+
+<p>
+    <div id="map"></div>
+</p>
